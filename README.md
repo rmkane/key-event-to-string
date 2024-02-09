@@ -11,43 +11,43 @@ In other words: This library provides the inverse functionality to common keyboa
 
 ## Installation
 
-```
-$ npm install --save key-event-to-string
+```shell
+npm install --save key-event-to-string
 ```
 
 ## Usage
 
 ```js
-var event2string = require('key-event-to-string')(options)
+const event2string = require("key-event-to-string")(options);
 
 document.body.onkeydown = (e) => {
-	var keys = event2string(e)
-	console.log(keys) // e.g. "Ctrl + A"
-}
+  var keys = event2string(e);
+  console.log(keys); // e.g. "Ctrl + A"
+};
 ```
 
 ### Options
 
 `options` is optional and can be an object with the following properties:
 
-| key | value | default value |
-|:--|:--|:--|
-| `cmd` |  What string to display for the Cmd/Meta modifier | `"Cmd"` |
-| `ctrl` |  What string to display for the Ctrl modifier | `"Ctrl"` |
-| `alt` |  What string to display for the Alt/Option modifier | `"Alt"` |
-| `shift` |  What string to display for the Shift modifier | `"Shift"` |
-| `joinWith` | The string that's displayed between all keys | `" + "`
+| key        | value                                              | default value |
+| :--------- | :------------------------------------------------- | :------------ |
+| `cmd`      | What string to display for the Cmd/Meta modifier   | `"Cmd"`       |
+| `ctrl`     | What string to display for the Ctrl modifier       | `"Ctrl"`      |
+| `alt`      | What string to display for the Alt/Option modifier | `"Alt"`       |
+| `shift`    | What string to display for the Shift modifier      | `"Shift"`     |
+| `joinWith` | The string that's displayed between all keys       | `" + "`       |
 
 For example this could be used to get the Mac style keyboard shortcut strings:
 
 ```js
-{
-	cmd: "⌘",
-	ctrl: "⌃",
-	alt: "⌥",
-	shift: "⇧",
-	joinWith: ""
-}
+const options = {
+  cmd: "⌘",
+  ctrl: "⌃",
+  alt: "⌥",
+  shift: "⇧",
+  joinWith: "",
+};
 ```
 
 The default settings are compatible with the format that common keyboard shortcut libraries, like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice), accept.
@@ -62,7 +62,6 @@ It returns an object with this information:
 - `hasKey`: True iff a key other than a modifier is pressed
 - `map`: An object containing information which modifier is active and what
   other key is pressed
-
 
 ## Disclaimer
 
