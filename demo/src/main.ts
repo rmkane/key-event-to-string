@@ -2,11 +2,6 @@ import './styles.css'
 
 import { details, event2string } from '../../lib'
 
-type ElementOptions = {
-  text?: string
-  classes?: string[]
-}
-
 const eventCapture = event2string({
   cmd: '⌘',
   ctrl: '⌃',
@@ -36,7 +31,7 @@ const keydownEvent = new KeyboardEvent('keydown', {
 
 document.dispatchEvent(keydownEvent)
 
-function renderKeyDownEventKeys(e: KeyboardEvent) {
+function renderKeyDownEventKeys(e: KeyboardEvent): void {
   const keysEl = document.querySelector<HTMLDivElement>('#keys')!
   const keySequence = eventCapture(e).split('+')
   keysEl.replaceChildren(
@@ -50,46 +45,26 @@ function renderKeyDownEventKeys(e: KeyboardEvent) {
   )
 }
 
-function createKey(key: string) {
-  return createEl('div', {
-    text: key,
-    classes: [
-      'flex',
-      'items-center',
-      'justify-center',
-      'min-w-32',
-      'min-h-32',
-      'px-4',
-      'py-2',
-      'bg-purple-100',
-      'font-mono',
-      'text-8xl',
-      'text-purple-900',
-      'border-2',
-      'border-b-4',
-      'border-purple-950',
-      'rounded-xl',
-    ],
-  })
+function createKey(key: string): HTMLDivElement {
+  return createElementFromHTML<HTMLDivElement>(`
+    <div
+      class="flex min-h-32 min-w-32 items-center justify-center rounded-xl border-2 border-b-4 border-purple-950 bg-purple-100 px-4 py-2 font-mono text-8xl text-purple-900"
+    >
+      ${key}
+    </div>
+  `)
 }
 
-function createSeparator(value: string) {
-  return createEl('div', {
-    text: value,
-    classes: [
-      'flex',
-      'items-center',
-      'justify-center',
-      'text-5xl',
-      'text-purple-500',
-    ],
-  })
+function createSeparator(value: string): HTMLDivElement {
+  return createElementFromHTML<HTMLDivElement>(`
+    <div class="flex items-center justify-center text-5xl text-purple-500">
+      ${value}
+    </div>
+  `)
 }
 
-function createEl(tagName: string, options: ElementOptions) {
-  const opts = { text: '', classes: [], ...options }
-  const el = document.createElement(tagName)
-  el.classList.add(...opts.classes)
-  el.textContent = opts.text
-  return el
+function createElementFromHTML<T extends HTMLElement>(htmlString: string): T {
+  const wrapperElement: HTMLDivElement = document.createElement('div')
+  wrapperElement.innerHTML = htmlString.trim()
+  return wrapperElement.firstElementChild as T
 }

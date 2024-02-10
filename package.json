@@ -20,7 +20,7 @@
     "url": "https://github.com/rmkane/key-event-to-string/issues"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.config.js",
     "build": "npm run build:lib && npm run build:docs && npm run build-demo",
     "build:docs": "typedoc lib/index.ts",
     "build:lib": "tsc && vite build",
