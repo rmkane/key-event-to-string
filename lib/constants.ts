@@ -8,11 +8,11 @@ const KEY_META_RIGHT = 93
 const KEY_OS_LEFT = 224
 
 const defaultOptions: Options = {
+  alt: 'Alt',
   cmd: 'Cmd',
   ctrl: 'Ctrl',
-  alt: 'Alt',
   shift: 'Shift',
-  joinWith: ' + '
+  joinWith: ' + ',
 }
 
 const modifierKeys = new Set<number>([
@@ -21,7 +21,7 @@ const modifierKeys = new Set<number>([
   KEY_META_LEFT,
   KEY_META_RIGHT,
   KEY_OS_LEFT,
-  KEY_SHIFT_LEFT
+  KEY_SHIFT_LEFT,
 ])
 
 const keyMap: KeyLookup = {
@@ -57,7 +57,7 @@ const keyMap: KeyLookup = {
   189: '-',
   190: '.',
   192: '`',
-  222: "'"
+  222: "'",
 }
 
 export { defaultOptions, keyMap, modifierKeys }
