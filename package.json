@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build-lib && npm run build-css",
     "preview": "vite preview",
+    "build-lib": "tsc && vite build",
     "build-css": "tailwindcss -i ./tailwind.css -o ./demo/styles.css --minify",
     "lint": "eslint --ignore-path .eslintignore --ext .ts ./lib",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\""
