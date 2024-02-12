@@ -5,8 +5,17 @@
   "description": " Converts a JavaScript key event object into a humanly readable format",
   "author": "Ryan Kane",
   "license": "MIT",
-  "main": "dist/key-event-to-string.es.js",
   "type": "module",
+  "main": "dist/key-event-to-string.cjs.js",
+  "module": "dist/key-event-to-string.es.js",
+  "browser": "dist/key-event-to-string.iife.js",
+  "types": "dist/index.d.ts",
+  "file": [
+    "dist",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rmkane/key-event-to-string.git"
@@ -21,11 +30,14 @@
   },
   "scripts": {
     "dev": "vite --config vite.config.js",
-    "build": "npm run build:lib && npm run build:docs && npm run build-demo",
-    "build:docs": "typedoc lib/index.ts",
-    "build:lib": "tsc && vite build",
+    "clean": "rm -rf dist docs lib",
+    "build": "npm run clean && npm run build:all",
+    "build:all": "npm run build:dist && npm run build:docs && npm run build-demo",
+    "build:docs": "typedoc src/index.ts",
+    "build:lib": "tsc",
+    "build:dist": "npm run build:lib && vite build",
     "build-demo": "cd demo && npm run build",
-    "lint": "eslint --ignore-path .eslintignore --ext .ts ./lib",
+    "lint": "eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\""
   },
   "devDependencies": {
@@ -40,6 +52,7 @@
     "prettier": "^3.2.5",
     "typedoc": "^0.25.8",
     "typescript": "^5.3.3",
-    "vite": "^5.1.0"
+    "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.7.2"
   }
 }

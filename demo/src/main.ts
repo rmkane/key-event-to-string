@@ -1,6 +1,6 @@
 import './styles.css'
 
-import { details, event2string } from '../../lib'
+import { details, event2string } from '../../src'
 
 const keysEl = document.querySelector<HTMLDivElement>('#keys')!
 
