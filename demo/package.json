@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.js",
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "build": "npm run clean && npm run build:dist",
     "build:dist": "tsc && vite build",
     "preview": "vite preview",
@@ -25,6 +25,7 @@
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "rimraf": "^5.0.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.0"
