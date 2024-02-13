@@ -2,5 +2,6 @@ node_modules/
 package-lock.json
 
 dist/
+docs/
 
 src/vite-env.d.ts
