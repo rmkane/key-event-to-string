@@ -2,6 +2,8 @@ import './styles.css'
 
 import { details, event2string } from '../../lib'
 
+const keysEl = document.querySelector<HTMLDivElement>('#keys')!
+
 const eventCapture = event2string({
   cmd: '⌘',
   ctrl: '⌃',
@@ -32,17 +34,18 @@ const keydownEvent = new KeyboardEvent('keydown', {
 document.dispatchEvent(keydownEvent)
 
 function renderKeyDownEventKeys(e: KeyboardEvent): void {
-  const keysEl = document.querySelector<HTMLDivElement>('#keys')!
   const keySequence = eventCapture(e).split('+')
-  keysEl.replaceChildren(
-    ...keySequence.reduce((elements: Element[], key: string, index: number) => {
-      if (index > 0) {
-        elements.push(createSeparator('+'))
-      }
-      elements.push(createKey(key))
-      return elements
-    }, []),
-  )
+  keysEl.replaceChildren(...toKeyComboList(keySequence))
+}
+
+function toKeyComboList(keys: string[]): HTMLElement[] {
+  return keys.reduce((elements: HTMLElement[], key: string, index: number) => {
+    if (index > 0) {
+      elements.push(createSeparator('+'))
+    }
+    elements.push(createKey(key))
+    return elements
+  }, [])
 }
 
 function createKey(key: string): HTMLDivElement {

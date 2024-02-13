@@ -18,12 +18,12 @@ npm install --save key-event-to-string
 ## Usage
 
 ```js
-const event2string = require("key-event-to-string")(options);
+const event2string = require('key-event-to-string')(options)
 
-document.body.onkeydown = (e) => {
-  var keys = event2string(e);
-  console.log(keys); // e.g. "Ctrl + A"
-};
+document.body.onkeydown = e => {
+  var keys = event2string(e)
+  console.log(keys) // e.g. "Ctrl + A"
+}
 ```
 
 ### Options
@@ -42,12 +42,12 @@ For example this could be used to get the Mac style keyboard shortcut strings:
 
 ```js
 const options = {
-  cmd: "⌘",
-  ctrl: "⌃",
-  alt: "⌥",
-  shift: "⇧",
-  joinWith: "",
-};
+  cmd: '⌘',
+  ctrl: '⌃',
+  alt: '⌥',
+  shift: '⇧',
+  joinWith: '',
+}
 ```
 
 The default settings are compatible with the format that common keyboard shortcut libraries, like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice), accept.
