@@ -2,16 +2,8 @@ import { JSDOM } from 'jsdom'
 import { describe, expect, it } from 'vitest'
 import { buildKeyArray, buildKeyMap } from './functions.js'
 
-type KeyboardEventConstructor = new (
-  type: string,
-  keyboardEventInit?: KeyboardEventInit,
-) => KeyboardEvent
-type CustomWindow = Window & {
-  KeyboardEvent: KeyboardEventConstructor
-}
-
 const dom = new JSDOM()
-const KeyboardEvent = (dom.window as unknown as CustomWindow).KeyboardEvent
+const { KeyboardEvent } = dom.window
 
 describe('Key Map Builder', () => {
   it('builds correct key map for given keyboard event', () => {
