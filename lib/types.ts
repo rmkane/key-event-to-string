@@ -1,31 +1,29 @@
-type Options = {
-  cmd: string;
-  ctrl: string;
-  alt: string;
-  shift: string;
-  joinWith: string;
-};
+interface Options {
+  cmd: string
+  ctrl: string
+  alt: string
+  shift: string
+  joinWith: string
+}
 
-type KeyLookup = {
-  [key: number]: string;
-};
+type KeyLookup = Record<number, string>
 
-type Modifiers = {
-  cmd: boolean;
-  ctrl: boolean;
-  alt: boolean;
-  shift: boolean;
-};
+interface Modifiers {
+  cmd: boolean
+  ctrl: boolean
+  alt: boolean
+  shift: boolean
+}
 
-type EventKey = {
-  character: string | null;
-  modifiers: Modifiers;
-};
+interface EventKey {
+  character: string | null
+  modifiers: Modifiers
+}
 
-type KeyEventDetails = {
-  hasKey: boolean;
-  hasModifier: boolean;
-  map: EventKey;
-};
+interface KeyEventDetails {
+  hasKey: boolean
+  hasModifier: boolean
+  map: EventKey
+}
 
-export type { EventKey, KeyEventDetails, KeyLookup, Modifiers, Options };
+export type { EventKey, KeyEventDetails, KeyLookup, Modifiers, Options }
