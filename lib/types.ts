@@ -1,4 +1,4 @@
-interface Options {
+type Options = {
   cmd: string
   ctrl: string
   alt: string
@@ -8,19 +8,19 @@ interface Options {
 
 type KeyLookup = Record<number, string>
 
-interface Modifiers {
+type Modifiers = {
   cmd: boolean
   ctrl: boolean
   alt: boolean
   shift: boolean
 }
 
-interface EventKey {
+type EventKey = {
   character: string | null
   modifiers: Modifiers
 }
 
-interface KeyEventDetails {
+type KeyEventDetails = {
   hasKey: boolean
   hasModifier: boolean
   map: EventKey

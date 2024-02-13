@@ -2,7 +2,7 @@ import type { EventKey, KeyEventDetails, Modifiers, Options } from './types'
 
 import { defaultOptions, keyMap, modifierKeys } from './constants'
 
-function buildKeyMap (event: KeyboardEvent): EventKey {
+function buildKeyMap(event: KeyboardEvent): EventKey {
   const { altKey, ctrlKey, keyCode, metaKey, shiftKey } = event
   const isOnlyModifier: boolean = modifierKeys.has(keyCode)
   const character = isOnlyModifier
@@ -15,12 +15,12 @@ function buildKeyMap (event: KeyboardEvent): EventKey {
       cmd: metaKey,
       ctrl: ctrlKey,
       alt: altKey,
-      shift: shiftKey
-    }
+      shift: shiftKey,
+    },
   }
 }
 
-function buildKeyArray (event: KeyboardEvent, options: Options): string[] {
+function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
   const map: EventKey = buildKeyMap(event)
   const modifiers: Modifiers = map.modifiers
   const result = []
@@ -34,7 +34,7 @@ function buildKeyArray (event: KeyboardEvent, options: Options): string[] {
   return result
 }
 
-function details (event: KeyboardEvent): KeyEventDetails {
+function details(event: KeyboardEvent): KeyEventDetails {
   const map: EventKey = buildKeyMap(event)
   const mods: Modifiers = map.modifiers
   const hasModifier = mods.cmd || mods.ctrl || mods.alt || mods.shift
@@ -42,11 +42,13 @@ function details (event: KeyboardEvent): KeyEventDetails {
   return {
     hasKey: map.character != null,
     hasModifier,
-    map
+    map,
   }
 }
 
-function event2string (options: Options = defaultOptions): (event: KeyboardEvent) => string {
+function event2string(
+  options: Options = defaultOptions,
+): (event: KeyboardEvent) => string {
   const opts: Options = { ...defaultOptions, ...options }
   return function (event: KeyboardEvent): string {
     return buildKeyArray(event, opts).join(opts.joinWith)

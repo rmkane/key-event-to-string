@@ -2,20 +2,34 @@
 <html lang="en" class="w-full h-full">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="../dist/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Key Event to String</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" defer>
-      import { details, event2string } from "./lib/index.ts";
-
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="../dist/key-event-to-string.iife.js"></script>
+  </head>
+  <body class="w-full h-full flex flex-col bg-purple-950 text-neutral-100">
+    <header
+      class="flex items-center justify-center w-full border-2 border-purple-800 border-t-0 border-l-0 border-r-0 border-b-1 p-4"
+    >
+      <h1 class="font-bold text-6xl">Key Event to String</h1>
+    </header>
+    <main class="flex flex-1 items-center justify-center h-full">
+      <div
+        id="keys"
+        class="flex items-center justify-center gap-4 bg-purple-900 border-2 border-purple-800 p-6 font-bold font-mono"
+      ></div>
+    </main>
+    <script>
       const keysEl = document.querySelector("#keys");
 
-      const eventCapture = event2string({
+      console.log(event2string);
+
+      const eventCapture = event2string.event2string({
         cmd: "⌘",
         ctrl: "⌃",
         alt: "⌥",
@@ -25,7 +39,7 @@
 
       document.addEventListener("keydown", (e) => {
         e.preventDefault();
-        console.log(details(e));
+        console.log(event2string.details(e));
         renderKeyDownEventKeys(e);
       });
 
@@ -101,18 +115,5 @@
         return el;
       }
     </script>
-  </head>
-  <body class="w-full h-full flex flex-col bg-purple-950 text-neutral-100">
-    <header
-      class="flex items-center justify-center w-full border-2 border-purple-800 border-t-0 border-l-0 border-r-0 border-b-1 p-4"
-    >
-      <h1 class="font-bold text-6xl">Key Event to String</h1>
-    </header>
-    <main class="flex flex-1 items-center justify-center h-full">
-      <div
-        id="keys"
-        class="flex items-center justify-center gap-4 bg-purple-900 border-2 border-purple-800 p-6 font-bold font-mono"
-      ></div>
-    </main>
   </body>
 </html>
