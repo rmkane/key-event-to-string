@@ -1,6 +1,6 @@
-import type { EventKey, KeyEventDetails, Modifiers, Options } from './types'
+import type { EventKey, KeyEventDetails, Modifiers, Options } from './types.js'
 
-import { event2string, details } from './functions'
+import { event2string, details } from './functions.js'
 
 export { EventKey, KeyEventDetails, Modifiers, Options }
 

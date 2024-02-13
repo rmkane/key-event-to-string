@@ -1,4 +1,4 @@
-import { type KeyLookup, type Options } from './types'
+import { type KeyLookup, type Options } from './types.js'
 
 // Key codes for various keys on the keyboard
 const KEY_SHIFT_LEFT = 16
