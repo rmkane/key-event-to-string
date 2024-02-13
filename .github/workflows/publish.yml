@@ -27,7 +27,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - name: Configure npm for public package publishing
-        run: npm config set access public
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+          echo "access=public" >> .npmrc
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
