@@ -31,7 +31,7 @@
   "scripts": {
     "dev": "vite --config vite.config.js",
     "clean": "rimraf dist docs lib",
-    "build": "npm run clean && npm run build:all",
+    "build": "npm run clean && npm run test && npm run build:all",
     "build:all": "npm run build:dist && npm run build:docs && npm run build-demo",
     "build:docs": "typedoc src/index.ts",
     "build:lib": "tsc",
@@ -39,7 +39,7 @@
     "build-demo": "cd demo && npm run build",
     "lint": "eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
-    "test": "vitest"
+    "test": "vitest --run"
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.6",
