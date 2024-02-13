@@ -1,22 +1,15 @@
 {
-  "name": "key-event-to-string",
-  "version": "1.2.0",
-  "description": " Converts a JavaScript key event object into a humanly readable format",
-  "main": "index.js",
+  "name": "@rmkane/key-event-to-string",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "test": "standard"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/florian/key-event-to-string.git"
-  },
-  "keywords": [
-    "events"
-  ],
-  "author": "Florian Hartmann",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/florian/key-event-to-string/issues"
-  },
-  "homepage": "https://github.com/florian/key-event-to-string#readme"
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.1.0"
+  }
 }
