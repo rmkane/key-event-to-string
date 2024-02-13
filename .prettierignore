@@ -1,8 +1,4 @@
 node_modules/
-package-lock.json
 
 dist/
 docs/
-lib/
-
-src/vite-env.d.ts

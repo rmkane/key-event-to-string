@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.config.js",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:dist",
+    "build": "pnpm clean && pnpm build:dist",
     "build:dist": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --ignore-path .eslintignore --ext .ts ./src",
