@@ -1,18 +1,15 @@
 {
   "name": "@rmkane/key-event-to-string",
-  "private": true,
-  "version": "0.1.0",
-  "description": " Converts a JavaScript key event object into a humanly readable format",
-  "author": "Ryan Kane",
   "license": "MIT",
-  "type": "module",
-  "main": "dist/key-event-to-string.cjs.js",
-  "module": "dist/key-event-to-string.es.js",
-  "browser": "dist/key-event-to-string.iife.js",
+  "version": "0.1.0",
+  "description": "Converts a JavaScript KeyboardEvent object into a human-readable format",
+  "author": "Ryan Kane",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "browser": "dist/index.global.js",
   "types": "dist/index.d.ts",
   "file": [
     "dist",
-    "lib",
     "README.md",
     "LICENSE"
   ],
@@ -29,20 +26,20 @@
     "url": "https://github.com/rmkane/key-event-to-string/issues"
   },
   "scripts": {
-    "dev": "vite --config vite.config.js",
     "clean": "rimraf dist docs lib",
-    "build": "npm run clean && npm run test && npm run build:all",
-    "build:all": "npm run build:dist && npm run build:docs && npm run build-demo",
+    "build": "pnpm clean && pnpm test && pnpm build:all",
+    "build:all": "pnpm build:lib && pnpm build:docs && pnpm build:demo",
+    "build:demo": "cd demo && pnpm build",
     "build:docs": "typedoc src/index.ts",
-    "build:lib": "tsc",
-    "build:dist": "npm run build:lib && vite build",
-    "build-demo": "cd demo && npm run build",
-    "lint": "eslint --ignore-path .eslintignore --ext .ts ./src",
+    "build:lib": "tsup src/index.ts --format cjs,esm,iife --global-name event2string --minify --dts",
+    "lint": "tsc && eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.6",
+    "@types/node": "^20.11.17",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -54,10 +51,9 @@
     "jsdom": "^24.0.0",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
+    "tsup": "^8.0.2",
     "typedoc": "^0.25.8",
     "typescript": "^5.3.3",
-    "vite": "^5.1.0",
-    "vite-plugin-dts": "^3.7.2",
     "vitest": "^1.2.2"
   }
 }
