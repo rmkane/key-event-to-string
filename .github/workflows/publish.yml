@@ -26,6 +26,8 @@ jobs:
           cache: "pnpm"
 
       - run: pnpm install --frozen-lockfile
+      - name: Configure npm for public package publishing
+        run: npm config set access public
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
