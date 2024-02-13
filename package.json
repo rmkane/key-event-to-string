@@ -2,19 +2,34 @@
   "name": "@rmkane/key-event-to-string",
   "private": true,
   "version": "0.1.0",
+  "description": " Converts a JavaScript key event object into a humanly readable format",
+  "author": "Ryan Kane",
+  "license": "MIT",
+  "main": "dist/key-event-to-string.es.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmkane/key-event-to-string.git"
+  },
+  "keywords": [
+    "events",
+    "keyboard"
+  ],
+  "homepage": "https://github.com/rmkane/key-event-to-string#readme",
+  "bugs": {
+    "url": "https://github.com/rmkane/key-event-to-string/issues"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "npm run build-lib && npm run build-css",
-    "preview": "vite preview",
-    "build-lib": "tsc && vite build",
-    "build-css": "tailwindcss -i ./tailwind.css -o ./demo/styles.css --minify",
+    "build": "npm run build:lib && npm run build:docs && npm run build-demo",
+    "build:docs": "typedoc lib/index.ts",
+    "build:lib": "tsc && vite build",
+    "build-demo": "cd demo && npm run build",
     "lint": "eslint --ignore-path .eslintignore --ext .ts ./lib",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
@@ -22,9 +37,8 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-promise": "^6.1.1",
-    "postcss": "^8.4.35",
     "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.1",
+    "typedoc": "^0.25.8",
     "typescript": "^5.3.3",
     "vite": "^5.1.0"
   }

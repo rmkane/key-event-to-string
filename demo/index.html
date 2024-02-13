@@ -1,16 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="w-full h-full">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="../dist/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Key Event to String</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="../dist/key-event-to-string.iife.js"></script>
+    <title>Vite + TS</title>
   </head>
   <body class="w-full h-full flex flex-col bg-purple-950 text-neutral-100">
     <header
@@ -24,99 +18,11 @@
         class="flex items-center justify-center gap-4 bg-purple-900 border-2 border-purple-800 p-6 font-bold font-mono"
       ></div>
     </main>
-    <footer class="flex items-center justify-center w-full border-2 border-purple-800 border-t-1 border-l-0 border-r-0 border-b-0 p-2">
+    <footer
+      class="flex items-center justify-center w-full border-2 border-purple-800 border-t-1 border-l-0 border-r-0 border-b-0 p-2"
+    >
       Copyright &copy; 2024 | rmkane
     </footer>
-    <script>
-      const keysEl = document.querySelector("#keys");
-
-      console.log(event2string);
-
-      const eventCapture = event2string.event2string({
-        cmd: "⌘",
-        ctrl: "⌃",
-        alt: "⌥",
-        shift: "⇧",
-        joinWith: "+",
-      });
-
-      document.addEventListener("keydown", (e) => {
-        e.preventDefault();
-        console.log(event2string.details(e));
-        renderKeyDownEventKeys(e);
-      });
-
-      const keydownEvent = new KeyboardEvent("keydown", {
-        key: "C",
-        keyCode: 67,
-        which: 67,
-        code: "KeyC",
-        location: 0,
-        altKey: false,
-        ctrlKey: true,
-        metaKey: false,
-        shiftKey: true,
-        repeat: false,
-      });
-
-      document.dispatchEvent(keydownEvent);
-
-      function renderKeyDownEventKeys(e) {
-        const keySequence = eventCapture(e).split("+");
-        keysEl.replaceChildren(
-          ...keySequence.reduce((elements, key, index) => {
-            if (index > 0) {
-              elements.push(createSeparator("+"));
-            }
-            elements.push(createKey(key));
-            return elements;
-          }, [])
-        );
-      }
-
-      function createKey(key) {
-        return createEl("div", {
-          text: key,
-          classes: [
-            "flex",
-            "items-center",
-            "justify-center",
-            "min-w-32",
-            "min-h-32",
-            "px-4",
-            "py-2",
-            "bg-purple-100",
-            "font-mono",
-            "text-8xl",
-            "text-purple-900",
-            "border-2",
-            "border-b-4",
-            "border-purple-950",
-            "rounded-xl",
-          ],
-        });
-      }
-
-      function createSeparator(value) {
-        return createEl("div", {
-          text: value,
-          classes: [
-            "flex",
-            "items-center",
-            "justify-center",
-            "text-5xl",
-            "text-purple-500",
-          ],
-        });
-      }
-
-      function createEl(tagName, options) {
-        const opts = { text: "", classes: [], ...options };
-        const el = document.createElement(tagName);
-        el.classList.add(...opts.classes);
-        el.textContent = opts.text;
-        return el;
-      }
-    </script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
