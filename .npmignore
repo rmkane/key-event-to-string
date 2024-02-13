@@ -1,4 +1,14 @@
+.vscode/
+demo/
+docs/
+node_modules/
 src/
+.editorconfig
+.eslintignore
+.eslintrc.json
 .gitignore
+.prettierignore
+.prettierrc.json
+index.html
 pnpm-lock.yaml
 tsconfig.json
