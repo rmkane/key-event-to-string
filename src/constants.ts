@@ -1,5 +1,6 @@
 import { type KeyLookup, type Options } from './types'
 
+// Key codes for various keys on the keyboard
 const KEY_SHIFT_LEFT = 16
 const KEY_CONTROL_LEFT = 17
 const KEY_ALT_LEFT = 18
@@ -7,6 +8,10 @@ const KEY_META_LEFT = 91
 const KEY_META_RIGHT = 93
 const KEY_OS_LEFT = 224
 
+/**
+ * The default options to use when converting a keyboard event to a string.
+ * These options define the string representation for each modifier key and the delimiter used to join them.
+ */
 const defaultOptions: Options = {
   alt: 'Alt',
   cmd: 'Cmd',
@@ -15,6 +20,10 @@ const defaultOptions: Options = {
   joinWith: ' + ',
 }
 
+/**
+ * A set of key codes that represent modifier keys.
+ * This set is used to quickly check if a key code corresponds to a modifier key.
+ */
 const modifierKeys = new Set<number>([
   KEY_ALT_LEFT,
   KEY_CONTROL_LEFT,
@@ -24,6 +33,9 @@ const modifierKeys = new Set<number>([
   KEY_SHIFT_LEFT,
 ])
 
+/**
+ * A map of key codes to their string representations.
+ */
 const keyMap: KeyLookup = {
   8: 'Backspace',
   9: 'Tab',
