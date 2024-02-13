@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.js",
-    "build": "tsc && vite build",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run build:dist",
+    "build:dist": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\""

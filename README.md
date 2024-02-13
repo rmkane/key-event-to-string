@@ -1,18 +1,14 @@
 # JavaScript keyboard events to strings
 
-This library helps converting the event object of a JavaScript keydown event
-into a humanly readable format.
-The idea is to use this for UI components that let the user choose keyboard
-shortcuts.
+This library helps converting the event object of a JavaScript keydown event into a humanly readable format.
+The idea is to use this for UI components that let the user choose keyboard shortcuts.
 
 In other words: This library provides the inverse functionality to common keyboard shortcut binding libraries like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice).
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
 ## Installation
 
-```shell
-npm install --save key-event-to-string
+```sh
+npm install key-event-to-string
 ```
 
 ## Usage
