@@ -2,11 +2,11 @@
  * The options for the keyboard shortcut.
  */
 type Options = {
-  cmd: string
-  ctrl: string
-  alt: string
-  shift: string
-  joinWith: string
+  cmd?: string
+  ctrl?: string
+  alt?: string
+  shift?: string
+  joinWith?: string
 }
 
 /**

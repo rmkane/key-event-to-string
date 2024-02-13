@@ -1,10 +1,10 @@
-import type { EventKey, KeyEventDetails, Modifiers, Options } from './types'
+import type { EventKey, KeyEventDetails, Modifiers, Options } from './types.js'
 
-import { defaultOptions, keyMap, modifierKeys } from './constants'
+import { defaultOptions, keyMap, modifierKeys } from './constants.js'
 
 /**
  * Builds a map of the key and the modifiers from a keyboard event.
- * @param event - The keyboard event.
+ * @param {KeyboardEvent} event - The keyboard event.
  * @returns An object that represents the key and the modifiers.
  */
 function buildKeyMap(event: KeyboardEvent): EventKey {
@@ -17,9 +17,9 @@ function buildKeyMap(event: KeyboardEvent): EventKey {
   return {
     character,
     modifiers: {
+      alt: altKey,
       cmd: metaKey,
       ctrl: ctrlKey,
-      alt: altKey,
       shift: shiftKey,
     },
   }
@@ -37,10 +37,10 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
   const modifiers: Modifiers = map.modifiers
   const result = []
 
-  if (modifiers.cmd) result.push(options.cmd)
-  if (modifiers.ctrl) result.push(options.ctrl)
-  if (modifiers.alt) result.push(options.alt)
-  if (modifiers.shift) result.push(options.shift)
+  if (modifiers.cmd) result.push(options.cmd!)
+  if (modifiers.ctrl) result.push(options.ctrl!)
+  if (modifiers.alt) result.push(options.alt!)
+  if (modifiers.shift) result.push(options.shift!)
   if (map.character != null) result.push(map.character)
 
   return result
@@ -79,4 +79,4 @@ function event2string(
   }
 }
 
-export { details, event2string }
+export { buildKeyArray, buildKeyMap, details, event2string }
