@@ -1,9 +1,10 @@
 {
   "name": "@rmkane/key-event-to-string",
-  "license": "MIT",
   "version": "0.0.1",
   "description": "Converts a JavaScript KeyboardEvent object into a human-readable format",
   "author": "Ryan Kane",
+  "license": "MIT",
+  "private": false,
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "browser": "dist/index.global.js",
