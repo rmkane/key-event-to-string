@@ -28,10 +28,11 @@
   "scripts": {
     "clean": "rimraf dist docs lib",
     "build": "pnpm clean && pnpm test && pnpm build:all",
-    "build:all": "pnpm build:lib && pnpm build:docs && pnpm build:demo",
+    "build:all": "pnpm build:lib && pnpm build:docs",
     "build:demo": "cd demo && pnpm build",
     "build:docs": "typedoc src/index.ts",
     "build:lib": "tsup src/index.ts --format cjs,esm,iife --global-name event2string --minify --dts",
+    "release": "pnpm run build && changeset publish",
     "lint": "tsc && eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
     "test": "vitest --run",
