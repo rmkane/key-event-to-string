@@ -9,16 +9,16 @@
   "module": "dist/index.js",
   "browser": "dist/index.global.js",
   "types": "dist/index.d.ts",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "files": [
     "dist/",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rmkane/key-event-to-string.git"
@@ -32,7 +32,7 @@
     "url": "https://github.com/rmkane/key-event-to-string/issues"
   },
   "scripts": {
-    "clean": "rimraf dist docs lib",
+    "clean": "rimraf dist docs",
     "build:all": "pnpm build:lib && pnpm build:docs && pnpm build:demo",
     "build:demo": "cd demo && pnpm install && pnpm build",
     "build:docs": "typedoc src/index.ts",

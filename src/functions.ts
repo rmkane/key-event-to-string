@@ -1,6 +1,7 @@
 import type { EventKey, KeyEventDetails, Modifiers, Options } from './types.js'
 
-import { defaultOptions, keyMap, modifierKeys } from './constants.js'
+import { defaultOptions } from './constants.js'
+import { isModifierKey } from './keys/modifiers.js'
 
 /**
  * Builds a map of the key and the modifiers from a keyboard event.
@@ -8,39 +9,44 @@ import { defaultOptions, keyMap, modifierKeys } from './constants.js'
  * @returns An object that represents the key and the modifiers.
  */
 function buildKeyMap(event: KeyboardEvent): EventKey {
-  const { altKey, ctrlKey, keyCode, metaKey, shiftKey } = event
-  const isOnlyModifier: boolean = modifierKeys.has(keyCode)
-  const character = isOnlyModifier
-    ? null
-    : keyMap[keyCode] ?? String.fromCharCode(keyCode)
-
+  const { altKey, ctrlKey, key, metaKey, shiftKey } = event
   return {
-    character,
+    character: isModifierKey(key) ? null : key,
     modifiers: {
       alt: altKey,
-      cmd: metaKey,
+      meta: metaKey,
       ctrl: ctrlKey,
       shift: shiftKey,
     },
   }
 }
 
+function hasModifier(mods: Modifiers): boolean {
+  return mods.meta || mods.ctrl || mods.alt || mods.shift
+}
+
 /**
  * Constructs an array of strings that represent the key and the modifiers from a keyboard event.
- * The order of the array is: cmd, ctrl, alt, shift, character.
+ * The order of the array is: meta, ctrl, alt, shift, character.
  * @param event - The keyboard event.
  * @param options - The options to use when converting the event to a string.
  * @returns An array of strings that represent the key and the modifiers.
  */
 function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
   const map: EventKey = buildKeyMap(event)
-  const modifiers: Modifiers = map.modifiers
+  const mods: Modifiers = map.modifiers
+
+  // Edge-case: Only the meta key is pressed
+  if (event.key === 'Meta' && !hasModifier(mods)) {
+    return [options.meta!]
+  }
+
   const result = []
 
-  if (modifiers.cmd) result.push(options.cmd!)
-  if (modifiers.ctrl) result.push(options.ctrl!)
-  if (modifiers.alt) result.push(options.alt!)
-  if (modifiers.shift) result.push(options.shift!)
+  if (mods.alt) result.push(options.alt!)
+  if (mods.ctrl) result.push(options.control!)
+  if (mods.meta) result.push(options.meta!)
+  if (mods.shift) result.push(options.shift!)
   if (map.character != null) result.push(map.character)
 
   return result
@@ -54,12 +60,9 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
  */
 function details(event: KeyboardEvent): KeyEventDetails {
   const map: EventKey = buildKeyMap(event)
-  const mods: Modifiers = map.modifiers
-  const hasModifier = mods.cmd || mods.ctrl || mods.alt || mods.shift
-
   return {
     hasKey: map.character != null,
-    hasModifier,
+    hasModifier: hasModifier(map.modifiers),
     map,
   }
 }

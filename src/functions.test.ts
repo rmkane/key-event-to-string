@@ -12,8 +12,8 @@ describe('Key Map Builder', () => {
 
     expect(result.character).toBe('A')
     expect(result.modifiers.alt).toBe(false)
-    expect(result.modifiers.cmd).toBe(false)
     expect(result.modifiers.ctrl).toBe(true)
+    expect(result.modifiers.meta).toBe(false)
     expect(result.modifiers.shift).toBe(false)
   })
 })
@@ -23,8 +23,8 @@ describe('Key Array Builder', () => {
     const event = new KeyboardEvent('keydown', { keyCode: 65, ctrlKey: true })
     const result = buildKeyArray(event, {
       alt: 'alt',
-      cmd: 'cmd',
-      ctrl: 'ctrl',
+      control: 'ctrl',
+      meta: 'cmd',
       shift: 'shift',
     })
 

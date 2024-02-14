@@ -1,26 +1,36 @@
+// Replacement for Options
+type KeyModifierOptions = {
+  Alt: string
+  Control: string
+  Meta: string
+  Shift: string
+}
+
+// Maps a KeyboardEvent key to alternate text
+type KeyToText = Record<string, string>
+
+// =============================================================================
+// TODO: REMOVE OR ALTER the types below
+// =============================================================================
+
 /**
  * The options for the keyboard shortcut.
  */
 type Options = {
-  cmd?: string
-  ctrl?: string
+  meta?: string
+  control?: string
   alt?: string
   shift?: string
   joinWith?: string
 }
 
 /**
- * A map of key codes to their string representations.
- */
-type KeyLookup = Record<number, string>
-
-/**
  * A set of key codes that represent modifier keys.
  */
 type Modifiers = {
-  cmd: boolean
-  ctrl: boolean
   alt: boolean
+  ctrl: boolean
+  meta: boolean
   shift: boolean
 }
 
@@ -42,4 +52,18 @@ type KeyEventDetails = {
   map: EventKey
 }
 
-export type { EventKey, KeyEventDetails, KeyLookup, Modifiers, Options }
+type KeyInfo = {
+  which: number
+  key: string
+  code?: string
+}
+
+export type {
+  EventKey,
+  KeyEventDetails,
+  KeyInfo,
+  KeyModifierOptions,
+  KeyToText,
+  Modifiers,
+  Options,
+}
