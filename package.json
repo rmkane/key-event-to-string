@@ -43,7 +43,8 @@
     "lint": "tsc && eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
     "test": "vitest --run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "changeset": "changeset"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
