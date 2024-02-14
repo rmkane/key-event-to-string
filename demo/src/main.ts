@@ -5,8 +5,8 @@ import { details, event2string } from '../../src'
 const keysEl = document.querySelector<HTMLDivElement>('#keys')!
 
 const eventCapture = event2string({
-  cmd: '⌘',
-  ctrl: '⌃',
+  meta: '⌘',
+  control: '⌃',
   alt: '⌥',
   shift: '⇧',
   joinWith: '+',
