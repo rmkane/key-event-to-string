@@ -2,6 +2,7 @@ import type { KeyModifierOptions } from '../types'
 
 const modifierKeys = new Set(['Alt', 'Control', 'Meta', 'Shift'])
 
+// @unused
 const defaultModifiers: KeyModifierOptions = {
   Meta: 'Cmd',
   Control: 'Ctrl',
@@ -9,6 +10,7 @@ const defaultModifiers: KeyModifierOptions = {
   Shift: 'Shift',
 } as const
 
+// @unused
 const defaultWindowsModifiers: KeyModifierOptions = {
   Meta: '\u229E', // (Windows key): '⊞' (SQUARE LOZENGE)
   Control: 'Ctrl',
@@ -16,6 +18,7 @@ const defaultWindowsModifiers: KeyModifierOptions = {
   Shift: 'Shift',
 } as const
 
+// @unused
 const defaultMacModifiers: KeyModifierOptions = {
   Meta: '\u2318', // (Command Key): '⌘' (PLACE OF INTEREST SIGN)
   Control: '\u2303', // '⌃' (UP ARROWHEAD)

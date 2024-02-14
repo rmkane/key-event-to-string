@@ -1,4 +1,4 @@
-import type { KeyInfo } from './types'
+import type { KeyInfo } from '../types'
 
 // Based on: https://www.toptal.com/developers/keycode/table
 const keys: KeyInfo[] = [
@@ -159,4 +159,16 @@ const keys: KeyInfo[] = [
   { which: 255, key: 'WakeUp', code: 'WakeUp' },
 ]
 
-export { keys }
+function findByCode(code: string): KeyInfo | undefined {
+  return keys.find(k => k.code === code)
+}
+
+function findByKey(key: string): KeyInfo[] {
+  return keys.filter(k => k.key === key)
+}
+
+function findByWhich(which: number): KeyInfo[] {
+  return keys.filter(k => k.which === which)
+}
+
+export { findByCode, findByKey, findByWhich, keys }

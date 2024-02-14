@@ -1,4 +1,6 @@
-// Replacement for Options
+/**
+ * Key modifier options for system defaults.
+ */
 type KeyModifierOptions = {
   Alt: string
   Control: string
@@ -6,12 +8,19 @@ type KeyModifierOptions = {
   Shift: string
 }
 
-// Maps a KeyboardEvent key to alternate text
-type KeyToText = Record<string, string>
+/**
+ * Keyboard key information.
+ */
+type KeyInfo = {
+  which: number
+  key: string
+  code?: string
+}
 
-// =============================================================================
-// TODO: REMOVE OR ALTER the types below
-// =============================================================================
+/**
+ * Maps a KeyboardEvent key to human-readable text or symbol.
+ */
+type KeyToText = Record<string, string>
 
 /**
  * The options for the keyboard shortcut.
@@ -29,7 +38,7 @@ type Options = {
  */
 type Modifiers = {
   alt: boolean
-  ctrl: boolean
+  control: boolean
   meta: boolean
   shift: boolean
 }
@@ -50,12 +59,6 @@ type KeyEventDetails = {
   hasKey: boolean
   hasModifier: boolean
   map: EventKey
-}
-
-type KeyInfo = {
-  which: number
-  key: string
-  code?: string
 }
 
 export type {

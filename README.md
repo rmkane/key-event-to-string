@@ -18,10 +18,10 @@ pnpm install @rmkane/key-event-to-string
 const KeyEventToString = require('key-event-to-string')
 const event2string = KeyEventToString(options)
 
-document.body.onkeydown = e => {
-  var keys = event2string(e)
+document.body.addEventListener('keydown', e => {
+  const keys = event2string(e)
   console.log(keys) // e.g. "Ctrl + A"
-}
+})
 ```
 
 ### Options
@@ -30,8 +30,8 @@ document.body.onkeydown = e => {
 
 | key        | value                                              | default value |
 | :--------- | :------------------------------------------------- | :------------ |
-| `cmd`      | What string to display for the Cmd/Meta modifier   | `"Cmd"`       |
-| `ctrl`     | What string to display for the Ctrl modifier       | `"Ctrl"`      |
+| `meta`     | What string to display for the Meta/Cmd modifier   | `"Cmd"`       |
+| `control`  | What string to display for the Ctrl modifier       | `"Ctrl"`      |
 | `alt`      | What string to display for the Alt/Option modifier | `"Alt"`       |
 | `shift`    | What string to display for the Shift modifier      | `"Shift"`     |
 | `joinWith` | The string that's displayed between all keys       | `" + "`       |
@@ -40,8 +40,8 @@ For example this could be used to get the Mac style keyboard shortcut strings:
 
 ```js
 const options = {
-  cmd: '⌘',
-  ctrl: '⌃',
+  meta: '⌘',
+  control: '⌃',
   alt: '⌥',
   shift: '⇧',
   joinWith: '',
