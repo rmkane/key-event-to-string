@@ -1,5 +1,11 @@
 # @rmkane/key-event-to-string
 
+## 0.2.0
+
+### Minor Changes
+
+- 55f8791: Convert `keyCode` usage to a combination of `key` and `code`
+
 ## 0.1.1
 
 ### Patch Changes
