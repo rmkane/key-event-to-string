@@ -12,3 +12,4 @@ src/
 index.html
 pnpm-lock.yaml
 tsconfig.json
+tsup.config.ts
