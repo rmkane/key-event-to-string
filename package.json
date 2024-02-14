@@ -14,9 +14,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist/",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
   ],
   "repository": {
     "type": "git",
@@ -32,12 +33,13 @@
   },
   "scripts": {
     "clean": "rimraf dist docs lib",
-    "build": "pnpm clean && pnpm test && pnpm build:all",
-    "build:all": "pnpm build:lib && pnpm build:docs",
-    "build:demo": "cd demo && pnpm build",
+    "build:all": "pnpm build:lib && pnpm build:docs && pnpm build:demo",
+    "build:demo": "cd demo && pnpm install && pnpm build",
     "build:docs": "typedoc src/index.ts",
-    "build:lib": "tsup src/index.ts --format cjs,esm,iife --global-name event2string --minify --dts",
-    "release": "pnpm run build && changeset publish",
+    "build:lib": "tsup src/index.ts --format cjs,esm,iife --minify --dts",
+    "build": "pnpm clean && pnpm build:lib",
+    "prepublishOnly": "pnpm test && pnpm lint && pnpm build",
+    "release": "changeset publish",
     "lint": "tsc && eslint --ignore-path .eslintignore --ext .ts ./src",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
     "test": "vitest --run",
