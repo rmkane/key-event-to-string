@@ -4,10 +4,11 @@ import { defaultOptions } from './constants.js'
 import { buildKeyArray, buildKeyMap, hasModifier } from './utils.js'
 
 /**
- * Returns an object containing details about a keyboard event.
- * The returned object includes the key pressed and whether any modifier keys (Cmd, Ctrl, Alt, Shift) were pressed.
- * @param event - The keyboard event to analyze.
- * @returns An object containing the key pressed and a boolean for each modifier key indicating whether it was pressed.
+ * Builds the details about a keyboard event, including whether it has a key,
+ * whether it has a modifier, and a map of the event keys.
+ *
+ * @param event - The keyboard event.
+ * @returns The details about the keyboard event.
  */
 function details(event: KeyboardEvent): KeyEventDetails {
   const map: EventKey = buildKeyMap(event)
@@ -19,10 +20,11 @@ function details(event: KeyboardEvent): KeyEventDetails {
 }
 
 /**
- * Returns a function that converts a keyboard event to a string representation.
- * The returned function, when called with a keyboard event, will return a string that includes the keys pressed and any modifier keys (Cmd, Ctrl, Alt, Shift) that were pressed.
- * @param options - The options to use when converting the event to a string.
- * @returns A function that takes a keyboard event and returns a string representation of it.
+ * Builds a string representation of a keyboard event.
+ *
+ * @param options - The options to use when building the string.
+ * @returns A function that takes a keyboard event and returns a string
+ *   representation of the event.
  */
 function event2string(
   options: Options = defaultOptions,

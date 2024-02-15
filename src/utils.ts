@@ -1,14 +1,15 @@
-import type { EventKey, Modifiers, Options } from './types.js'
+import type { EventKey, KeyEventModifiers, Options } from './types.js'
 
 import { isModifierKey } from './keys/modifiers.js'
 import { shorthandLookup } from './keys/shorthand.js'
 import { physicalKeyLookup } from './keys/physical.js'
 
 /**
- * Test if a given key is a letter and convert it to upper-case.
+ * Maps an alpha key to its uppercase version.
  *
- * @param key A KeyboardEvent.key value.
- * @returns An upper-case key if it's a letter; otherwise, the original key.
+ * @param key - The key to map.
+ * @returns The uppercase version of the key if it is an alpha key; otherwise,
+ *   the original key.
  */
 function mapAlpha(key: string): string {
   return /^[a-zA-Z]$/.test(key) ? key.toUpperCase() : key
@@ -17,51 +18,48 @@ function mapAlpha(key: string): string {
 /**
  * Map a character to a shorthand or physical key.
  *
- * @param code a KeyBoardEvent.code value
- * @param key a KeyBoardEvent.key value
+ * @param code - A KeyBoardEvent.code value
+ * @param key - A KeyBoardEvent.key value
  */
 function mapCharacter(code: string, key: string): string {
   return shorthandLookup[code] ?? physicalKeyLookup[code] ?? mapAlpha(key)
 }
 
 /**
- * Builds a map of the key and the modifiers from a keyboard event.
- * @param {KeyboardEvent} event - The keyboard event.
- * @returns An object that represents the key and the modifiers.
+ * Builds a key map from a keyboard event.
+ *
+ * @param event - The keyboard event.
+ * @returns - An object containing the character and modifiers of the keyboard
+ *   event.
  */
 function buildKeyMap(event: KeyboardEvent): EventKey {
   const { code, key, altKey, ctrlKey, metaKey, shiftKey } = event
   return {
     character: isModifierKey(key) ? null : mapCharacter(code, key),
-    modifiers: {
-      alt: altKey,
-      meta: metaKey,
-      control: ctrlKey,
-      shift: shiftKey,
-    },
+    modifiers: { altKey, ctrlKey, metaKey, shiftKey },
   }
 }
 
 /**
- * Checks if any modifier keys are active.
+ * Determines whether any modifier keys are pressed.
  *
- * @param mods An object representing the state of modifier keys.
- * @returns True if any of the modifier keys (meta, control, alt, shift) are active; otherwise, false.
+ * @param mods - The modifiers to check.
+ * @returns True if any modifier keys are pressed; otherwise, false.
  */
-function hasModifier(mods: Modifiers): boolean {
-  return mods.meta || mods.control || mods.alt || mods.shift
+function hasModifier(mods: KeyEventModifiers): boolean {
+  return mods.metaKey || mods.ctrlKey || mods.altKey || mods.shiftKey
 }
 
 /**
- * Constructs an array of strings that represent the key and the modifiers from a keyboard event.
- * The order of the array is: meta, ctrl, alt, shift, character.
+ * Builds an array of key labels from a keyboard event.
+ *
  * @param event - The keyboard event.
- * @param options - The options to use when converting the event to a string.
- * @returns An array of strings that represent the key and the modifiers.
+ * @param options - The options to use when building the key array.
+ * @returns An array of key labels.
  */
 function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
   const map: EventKey = buildKeyMap(event)
-  const mods: Modifiers = map.modifiers
+  const mods: KeyEventModifiers = map.modifiers
 
   // Edge-case: Only the meta key is pressed
   if (event.key === 'Meta' && !hasModifier(mods)) {
@@ -70,13 +68,14 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
 
   const result = []
 
-  if (mods.alt) result.push(options.alt!)
-  if (mods.control) result.push(options.control!)
-  if (mods.meta) result.push(options.meta!)
-  if (mods.shift) result.push(options.shift!)
+  // The order is: Meta, Control, Alt, Shift, Character
+  if (mods.metaKey) result.push(options.meta!)
+  if (mods.ctrlKey) result.push(options.control!)
+  if (mods.altKey) result.push(options.alt!)
+  if (mods.shiftKey) result.push(options.shift!)
   if (map.character != null) result.push(map.character)
 
   return result
 }
 
-export { buildKeyArray, buildKeyMap, hasModifier }
+export { buildKeyArray, buildKeyMap, hasModifier, mapAlpha }

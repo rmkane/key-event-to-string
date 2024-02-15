@@ -1,5 +1,5 @@
 {
-  "plugins": ["prettier-plugin-tailwindcss"],
+  "plugins": ["prettier-plugin-jsdoc", "prettier-plugin-tailwindcss"],
   "arrowParens": "avoid",
   "printWidth": 80,
   "semi": false,

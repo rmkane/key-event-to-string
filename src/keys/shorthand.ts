@@ -1,8 +1,6 @@
 import type { KeyToText } from '../types'
 
-/**
- * Maps an event.key or event.code to a shorthand abbreviation or symbol.
- */
+/** Maps an event.key to a symbol for desktop-friendly support. */
 const shorthandLookup: KeyToText = {
   ArrowLeft: '\u2190', // '←' (LEFTWARDS ARROW)
   ArrowUp: '\u2191', // '↑' (UPWARDS ARROW)
@@ -11,9 +9,7 @@ const shorthandLookup: KeyToText = {
   Escape: 'Esc',
 }
 
-/**
- * Maps an event.key to a symbol for mobile-friendly support.
- */
+/** Maps an event.key to a symbol for mobile-friendly support. */
 const mobileShorthandLookup: KeyToText = {
   Backspace: '\u232B', // '⌫' (ERASE TO THE LEFT)
   CapsLock: '\u21EA', // '⇪' (UPWARDS WHITE ARROW FROM BAR)

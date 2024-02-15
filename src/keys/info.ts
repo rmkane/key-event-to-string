@@ -1,6 +1,10 @@
-import type { KeyInfo } from '../types'
+import type { KeyInfo, Maybe } from '../types'
 
-// Based on: https://www.toptal.com/developers/keycode/table
+/**
+ * A list of key codes and their corresponding keys and codes.
+ *
+ * Based on: https://www.toptal.com/developers/keycode/table
+ */
 const keys: KeyInfo[] = [
   { which: 0, key: 'Unidentified', code: 'Unidentified' },
   { which: 3, key: 'Cancel', code: 'Pause' },
@@ -159,14 +163,32 @@ const keys: KeyInfo[] = [
   { which: 255, key: 'WakeUp', code: 'WakeUp' },
 ]
 
-function findByCode(code: string): KeyInfo | undefined {
+/**
+ * Find a key by its code.
+ *
+ * @param code The code to search for.
+ * @returns The key info, if found.
+ */
+function findByCode(code: string): Maybe<KeyInfo> {
   return keys.find(k => k.code === code)
 }
 
+/**
+ * Find a key by its key.
+ *
+ * @param key The key to search for.
+ * @returns The key info, if found.
+ */
 function findByKey(key: string): KeyInfo[] {
   return keys.filter(k => k.key === key)
 }
 
+/**
+ * Find a key by its which.
+ *
+ * @param which The which to search for.
+ * @returns The key info, if found.
+ */
 function findByWhich(which: number): KeyInfo[] {
   return keys.filter(k => k.which === which)
 }

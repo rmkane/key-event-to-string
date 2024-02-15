@@ -4,6 +4,7 @@ import { defaultModifiers } from './keys/modifiers.js'
 
 /**
  * The default options to use when converting a keyboard event to a string.
+ *
  * These options define the string representation for each modifier key and the
  * delimiter used to join them.
  */

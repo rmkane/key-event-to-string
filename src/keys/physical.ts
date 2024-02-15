@@ -1,5 +1,6 @@
 import type { KeyToText } from '../types'
 
+/** Maps an event.key to a symbol for physical keyboards. */
 const physicalKeyLookup: KeyToText = {
   Backquote: '`',
   Digit0: '0',

@@ -2,14 +2,44 @@ import './styles.css'
 
 import { details, event2string } from '../../src'
 
+/**
+ * Escapes a string for use in a regular expression.
+ *
+ * @param text - The text to escape.
+ * @returns The escaped text.
+ */
+function escapedRegExp(text: string): RegExp {
+  return new RegExp(text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), 'g')
+}
+
+// The plus sign and a placeholder for it.
+const PLUS_SIGN = '+'
+const PLUS_PLACEHOLDER = '__PLUS__'
+
+// Parses the keys from a string, replacing the plus sign with a placeholder
+// to prevent it from being split.
+function parseKeys(keys: string, delim: string): string[] {
+  return keys === PLUS_SIGN
+    ? [PLUS_SIGN]
+    : keys
+        .replace(
+          escapedRegExp(`${delim}${PLUS_SIGN}`),
+          `${delim}${PLUS_PLACEHOLDER}`,
+        )
+        .split(delim)
+        .map(key => (key === PLUS_PLACEHOLDER ? PLUS_SIGN : key))
+}
+
 const keysEl = document.querySelector<HTMLDivElement>('#keys')!
+
+const joinToken = '+'
 
 const eventCapture = event2string({
   meta: '⌘',
   control: '⌃',
   alt: '⌥',
   shift: '⇧',
-  joinWith: '+',
+  joinWith: joinToken,
 })
 
 document.addEventListener('keydown', e => {
@@ -34,8 +64,10 @@ const keydownEvent = new KeyboardEvent('keydown', {
 document.dispatchEvent(keydownEvent)
 
 function renderKeyDownEventKeys(e: KeyboardEvent): void {
-  const keySequence = eventCapture(e).split('+')
-  keysEl.replaceChildren(...toKeyComboList(keySequence))
+  const keySequence = eventCapture(e)
+  console.log('Sequence:', keySequence)
+  const keys = parseKeys(keySequence, joinToken)
+  keysEl.replaceChildren(...toKeyComboList(keys))
 }
 
 function toKeyComboList(keys: string[]): HTMLElement[] {
