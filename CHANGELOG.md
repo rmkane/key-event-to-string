@@ -1,5 +1,11 @@
 # @rmkane/key-event-to-string
 
+## 0.2.3
+
+### Patch Changes
+
+- 7adf1c3: Fix key sequence order
+
 ## 0.2.2
 
 ### Patch Changes
