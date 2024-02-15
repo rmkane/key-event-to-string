@@ -1,5 +1,11 @@
 # @rmkane/key-event-to-string
 
+## 0.2.2
+
+### Patch Changes
+
+- c6d0da4: Add physical key mapping for Space
+
 ## 0.2.1
 
 ### Patch Changes
