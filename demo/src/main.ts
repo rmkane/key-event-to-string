@@ -51,7 +51,7 @@ function toKeyComboList(keys: string[]): HTMLElement[] {
 function createKey(key: string): HTMLDivElement {
   return createElementFromHTML<HTMLDivElement>(`
     <div
-      class="flex min-h-32 min-w-32 items-center justify-center rounded-xl border-2 border-b-4 border-purple-950 bg-purple-100 px-4 py-2 font-mono text-8xl text-purple-900"
+      class="flex min-h-32 min-w-32 items-center justify-center rounded-xl border-2 border-b-4 border-purple-950 bg-purple-100 px-8 py-2 font-mono text-8xl text-purple-900"
     >
       ${key}
     </div>

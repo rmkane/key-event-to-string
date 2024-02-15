@@ -22,6 +22,7 @@ const physicalKeyLookup: KeyToText = {
   Comma: ',',
   Period: '.',
   Slash: '/',
+  Space: 'Space',
 }
 
 export { physicalKeyLookup }
