@@ -1,5 +1,14 @@
 # @rmkane/key-event-to-string
 
+## 0.3.1
+
+### Patch Changes
+
+- b467014: Refactor code
+
+  - Replace `any` with `unknown`
+  - Migrate config builder to its own file
+
 ## 0.3.0
 
 ### Minor Changes
