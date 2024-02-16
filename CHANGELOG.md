@@ -1,5 +1,11 @@
 # @rmkane/key-event-to-string
 
+## 0.3.0
+
+### Minor Changes
+
+- 794729e: Revised options for better extensibility
+
 ## 0.2.3
 
 ### Patch Changes
