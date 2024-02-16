@@ -1,8 +1,14 @@
-import type { EventKey, KeyEventModifiers, Options } from './types.js'
+import type {
+  CodeAliases,
+  EventKey,
+  KeyAliases,
+  KeyEventModifiers,
+  Options,
+} from '../types.js'
 
-import { isModifierKey } from './keys/modifiers.js'
-import { shorthandLookup } from './keys/shorthand.js'
-import { physicalKeyLookup } from './keys/physical.js'
+import { defaultModifiers, isModifierKey } from '../keys/modifiers.js'
+import { defaultOptions } from '../constants.js'
+import { pluck } from './object.js'
 
 /**
  * Maps an alpha key to its uppercase version.
@@ -22,7 +28,11 @@ function mapAlpha(key: string): string {
  * @param key - A KeyBoardEvent.key value
  */
 function mapCharacter(code: string, key: string): string {
-  return shorthandLookup[code] ?? physicalKeyLookup[code] ?? mapAlpha(key)
+  return (
+    pluck(defaultOptions.codeAliases!, code as keyof CodeAliases) ??
+    pluck(defaultOptions.keyAliases!, key as keyof KeyAliases) ??
+    mapAlpha(key)
+  )
 }
 
 /**
@@ -63,17 +73,27 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
 
   // Edge-case: Only the meta key is pressed
   if (event.key === 'Meta' && !hasModifier(mods)) {
-    return [options.meta!]
+    return [options.keyAliases?.Meta ?? defaultModifiers.Meta!]
   }
 
   const result = []
 
   // The order is: Meta, Control, Alt, Shift, Character
-  if (mods.metaKey) result.push(options.meta!)
-  if (mods.ctrlKey) result.push(options.control!)
-  if (mods.altKey) result.push(options.alt!)
-  if (mods.shiftKey) result.push(options.shift!)
-  if (map.character != null) result.push(map.character)
+  if (mods.metaKey) {
+    result.push(options.keyAliases?.Meta ?? defaultModifiers.Meta!)
+  }
+  if (mods.ctrlKey) {
+    result.push(options.keyAliases?.Control ?? defaultModifiers.Control!)
+  }
+  if (mods.altKey) {
+    result.push(options.keyAliases?.Alt ?? defaultModifiers.Alt!)
+  }
+  if (mods.shiftKey) {
+    result.push(options.keyAliases?.Shift ?? defaultModifiers.Shift!)
+  }
+  if (map.character != null) {
+    result.push(map.character)
+  }
 
   return result
 }

@@ -1,17 +1,5 @@
-/*
- * This file contains the types used in the keyboard-shortcut module.
- */
-
 /** A type that represents a value that may be null or undefined. */
 type Maybe<T> = T | null | undefined
-
-/** Key modifier options for system defaults. */
-type KeyModifierOptions = {
-  Alt: string
-  Control: string
-  Meta: string
-  Shift: string
-}
 
 /** The details about a key in a keyboard event. */
 type KeyInfo = {
@@ -23,16 +11,87 @@ type KeyInfo = {
 /** A map of key codes to their corresponding text or symbol. */
 type KeyToText = Record<string, string>
 
-/** The options for the keyboard shortcut. */
+/** System key aliases. */
+type SystemKeyAliases = {
+  Escape?: string
+}
+
+/** Modifier key aliases. */
+type ModifierKeyAliases = {
+  Meta?: string
+  Control?: string
+  Alt?: string
+  Shift?: string
+}
+
+/** Arrow key aliases. */
+type ArrowKeyAliases = {
+  ArrowLeft?: string
+  ArrowUp?: string
+  ArrowRight?: string
+  ArrowDown?: string
+}
+
+/** Mobile key aliases. */
+type MobileKeyAliases = {
+  Backspace?: string
+  CapsLock?: string
+  Enter?: string
+  Home?: string
+  Delete?: string
+  '/'?: string
+  '*'?: string
+  Shift?: string
+  Tab?: string
+}
+
+/** Keyboard event key aliases. */
+type KeyAliases = SystemKeyAliases &
+  ModifierKeyAliases &
+  ArrowKeyAliases &
+  MobileKeyAliases
+
+/** Keyboard event code aliases. */
+type CodeAliases = {
+  Backquote?: string
+  Digit0?: string
+  Digit1?: string
+  Digit2?: string
+  Digit3?: string
+  Digit4?: string
+  Digit5?: string
+  Digit6?: string
+  Digit7?: string
+  Digit8?: string
+  Digit9?: string
+  Minus?: string
+  Equal?: string
+  BracketLeft?: string
+  BracketRight?: string
+  Backslash?: string
+  Semicolon?: string
+  Quote?: string
+  Comma?: string
+  Period?: string
+  Slash?: string
+  Space?: string
+}
+
+/** The platform on which the keyboard event occurred. */
+type Platform = {
+  isMac?: boolean
+  isMobile?: boolean
+}
+
+/** The options to use when building a key array. */
 type Options = {
-  meta?: string
-  control?: string
-  alt?: string
-  shift?: string
+  keyAliases?: KeyAliases
+  codeAliases?: CodeAliases
+  platform?: Platform
   joinWith?: string
 }
 
-/** A set of key codes that represent modifier keys. */
+/** A set of key codes that represent modifier keys for a KeyboardEvent. */
 type KeyEventModifiers = {
   altKey: boolean
   ctrlKey: boolean
@@ -57,12 +116,18 @@ type KeyEventDetails = {
 }
 
 export type {
+  ArrowKeyAliases,
+  CodeAliases,
   EventKey,
+  KeyAliases,
   KeyEventDetails,
   KeyEventModifiers,
   KeyInfo,
-  KeyModifierOptions,
   KeyToText,
   Maybe,
+  MobileKeyAliases,
+  ModifierKeyAliases,
   Options,
+  Platform,
+  SystemKeyAliases,
 }

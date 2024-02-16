@@ -28,23 +28,26 @@ document.body.addEventListener('keydown', e => {
 
 `options` is optional and can be an object with the following properties:
 
-| key        | value                                              | default value |
-| :--------- | :------------------------------------------------- | :------------ |
-| `meta`     | What string to display for the Meta/Cmd modifier   | `"Cmd"`       |
-| `control`  | What string to display for the Ctrl modifier       | `"Ctrl"`      |
-| `alt`      | What string to display for the Alt/Option modifier | `"Alt"`       |
-| `shift`    | What string to display for the Shift modifier      | `"Shift"`     |
-| `joinWith` | The string that's displayed between all keys       | `" + "`       |
+| key                 | value                                        | default |
+| :------------------ | :------------------------------------------- | :------ |
+| `keyAliases`        | Modifier, arrow, and mobile keys             |         |
+| `codeAliases`       | Physical keys that have Shift-modifiers      |         |
+| `platform`          | Platform options                             |         |
+| `platform.isMac`    | Use macOS Meta keys                          | `false` |
+| `platform.isMobile` | Use shorthand keys for mobile keyboards      | `false` |
+| `joinWith`          | The string that's displayed between all keys | `" + "` |
 
 For example this could be used to get the Mac style keyboard shortcut strings:
 
 ```js
 const options = {
-  meta: '⌘',
-  control: '⌃',
-  alt: '⌥',
-  shift: '⇧',
-  joinWith: '',
+  keyAliases: {
+    Meta: '⌘',
+    Control: '⌃',
+    Alt: '⌥',
+    Shift: '⇧',
+  },
+  joinWith: '+',
 }
 ```
 

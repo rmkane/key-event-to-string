@@ -35,10 +35,7 @@ const keysEl = document.querySelector<HTMLDivElement>('#keys')!
 const joinToken = '+'
 
 const eventCapture = event2string({
-  meta: '⌘',
-  control: '⌃',
-  alt: '⌥',
-  shift: '⇧',
+  platform: { isMac: true },
   joinWith: joinToken,
 })
 

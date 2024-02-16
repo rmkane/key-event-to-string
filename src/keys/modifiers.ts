@@ -1,4 +1,4 @@
-import type { KeyModifierOptions } from '../types'
+import type { ModifierKeyAliases } from '../types'
 
 /** A set of key codes that represent modifier keys. */
 const modifierKeys = new Set(['Alt', 'Control', 'Meta', 'Shift'])
@@ -7,7 +7,7 @@ const modifierKeys = new Set(['Alt', 'Control', 'Meta', 'Shift'])
  * The default key modifiers to use when converting a keyboard event to a
  * string.
  */
-const defaultModifiers: KeyModifierOptions = {
+const defaultModifiers: ModifierKeyAliases = {
   Meta: 'Cmd',
   Control: 'Ctrl',
   Alt: 'Alt',
@@ -18,7 +18,7 @@ const defaultModifiers: KeyModifierOptions = {
  * The default key modifiers to use when converting a keyboard event to a string
  * on Windows.
  */
-const defaultWindowsModifiers: KeyModifierOptions = {
+const defaultWindowsModifiers: ModifierKeyAliases = {
   Meta: '\u229E', // (Windows key): '⊞' (SQUARE LOZENGE)
   Control: 'Ctrl',
   Alt: 'Alt',
@@ -29,7 +29,7 @@ const defaultWindowsModifiers: KeyModifierOptions = {
  * The default key modifiers to use when converting a keyboard event to a string
  * on macOS.
  */
-const defaultMacModifiers: KeyModifierOptions = {
+const defaultMacModifiers: ModifierKeyAliases = {
   Meta: '\u2318', // (Command Key): '⌘' (PLACE OF INTEREST SIGN)
   Control: '\u2303', // '⌃' (UP ARROWHEAD)
   Alt: '\u2325', // (Option key): '⌥' (OPTION KEY)

@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom'
 import { describe, expect, it } from 'vitest'
-import { buildKeyArray, buildKeyMap, mapAlpha } from './utils.js'
-import { findByCode, findByKey } from './keys/info.js'
+import { buildKeyArray, buildKeyMap, mapAlpha } from './key.js'
+import { findByCode, findByKey } from '../keys/info.js'
 
 const dom = new JSDOM()
 const { KeyboardEvent } = dom.window
@@ -33,7 +33,9 @@ describe('Key Array Builder', () => {
     const [keyA] = findByKey('a')
     const event = new KeyboardEvent('keydown', { ...keyA, ctrlKey: true })
     const result = buildKeyArray(event, {
-      control: 'ctrl',
+      keyAliases: {
+        Control: 'ctrl',
+      },
     })
 
     expect(result).toEqual(['ctrl', 'A'])
