@@ -7,7 +7,6 @@ import type {
 } from '../types.js'
 
 import { defaultModifierKeyAliases } from '../keys/aliases/modifierAliases.js'
-import { defaultOptions } from '../options.js'
 import { pluck } from './object.js'
 
 /** A set of key codes that represent modifier keys. */
@@ -40,10 +39,10 @@ function mapAlpha(key: string): string {
  * @param code - A KeyBoardEvent.code value
  * @param key - A KeyBoardEvent.key value
  */
-function mapCharacter(code: string, key: string): string {
+function mapCharacter(code: string, key: string, options: Options): string {
   return (
-    pluck(defaultOptions.codeAliases!, code as keyof CodeAliases) ??
-    pluck(defaultOptions.keyAliases!, key as keyof KeyAliases) ??
+    pluck(options.codeAliases!, code as keyof CodeAliases) ??
+    pluck(options.keyAliases!, key as keyof KeyAliases) ??
     mapAlpha(key)
   )
 }
@@ -56,9 +55,9 @@ function mapCharacter(code: string, key: string): string {
  *   event.
  */
 function buildKeyMap(event: KeyboardEvent): EventKey {
-  const { code, key, altKey, ctrlKey, metaKey, shiftKey } = event
+  const { key, code, altKey, ctrlKey, metaKey, shiftKey } = event
   return {
-    character: isModifierKey(key) ? null : mapCharacter(code, key),
+    data: { key, code },
     modifiers: { altKey, ctrlKey, metaKey, shiftKey },
   }
 }
@@ -106,11 +105,12 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
   if (mods.shiftKey) {
     result.push(options.keyAliases?.Shift ?? defaultModifierKeyAliases.Shift!)
   }
-  if (map.character != null) {
-    result.push(map.character)
+  if (!isModifierKey(map.data.key!)) {
+    const { code, key } = map.data
+    result.push(mapCharacter(code!, key!, options))
   }
 
   return result
 }
 
-export { buildKeyArray, buildKeyMap, hasModifier, mapAlpha }
+export { buildKeyArray, buildKeyMap, hasModifier, isModifierKey, mapAlpha }

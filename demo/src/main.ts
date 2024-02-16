@@ -1,6 +1,6 @@
 import './styles.css'
 
-import { details, event2string } from '../../src'
+import { KeyboardEventDetails, KeyboardEventProcessor } from '../../src'
 
 /**
  * Escapes a string for use in a regular expression.
@@ -18,6 +18,7 @@ const PLUS_PLACEHOLDER = '__PLUS__'
 
 // Parses the keys from a string, replacing the plus sign with a placeholder
 // to prevent it from being split.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function parseKeys(keys: string, delim: string): string[] {
   return keys === PLUS_SIGN
     ? [PLUS_SIGN]
@@ -34,15 +35,18 @@ const keysEl = document.querySelector<HTMLDivElement>('#keys')!
 
 const joinToken = '+'
 
-const eventCapture = event2string({
+const options = {
   platform: { isMac: true },
   joinWith: joinToken,
-})
+}
+
+const eventProcessor = new KeyboardEventProcessor(options)
 
 document.addEventListener('keydown', e => {
   e.preventDefault()
-  console.log(details(e))
-  renderKeyDownEventKeys(e)
+  const details = eventProcessor.processKeyboardEvent(e);
+  console.log(details.getKeyEventDetails());
+  renderKeyDownEventKeys(details)
 })
 
 const keydownEvent = new KeyboardEvent('keydown', {
@@ -60,10 +64,10 @@ const keydownEvent = new KeyboardEvent('keydown', {
 
 document.dispatchEvent(keydownEvent)
 
-function renderKeyDownEventKeys(e: KeyboardEvent): void {
-  const keySequence = eventCapture(e)
-  console.log('Sequence:', keySequence)
-  const keys = parseKeys(keySequence, joinToken)
+function renderKeyDownEventKeys(details: KeyboardEventDetails): void {
+  const parsedKeys = parseKeys(details.getKeysAsString(), joinToken)
+  const keys = details.getKeysAsArray();
+  console.log('Keys match:', keys.join(' ') === parsedKeys.join(' '));
   keysEl.replaceChildren(...toKeyComboList(keys))
 }
 

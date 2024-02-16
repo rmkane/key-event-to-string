@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom'
 import { describe, expect, it } from 'vitest'
 import { buildKeyArray, buildKeyMap, mapAlpha } from './key.js'
 import { findByCode, findByKey } from '../keys/info.js'
+import { mergeOptions } from '../options.js'
 
 const dom = new JSDOM()
 const { KeyboardEvent } = dom.window
@@ -12,7 +13,7 @@ describe('Key Map Builder', () => {
     const event = new KeyboardEvent('keydown', { ...keyA, ctrlKey: true })
     const result = buildKeyMap(event)
 
-    expect(result.character).toBe('A')
+    expect(result.data.key).toBe('a')
     expect(result.modifiers.altKey).toBe(false)
     expect(result.modifiers.ctrlKey).toBe(true)
     expect(result.modifiers.metaKey).toBe(false)
@@ -24,7 +25,7 @@ describe('Key Map Builder', () => {
     const event = new KeyboardEvent('keydown', { ...keyShift, shiftKey: true })
     const result = buildKeyMap(event)
 
-    expect(result.character).toBe('')
+    expect(result.data.key).toBe('')
   })
 })
 
@@ -32,11 +33,12 @@ describe('Key Array Builder', () => {
   it('builds correct key array for given keyboard event and key labels', () => {
     const [keyA] = findByKey('a')
     const event = new KeyboardEvent('keydown', { ...keyA, ctrlKey: true })
-    const result = buildKeyArray(event, {
+    const options = mergeOptions({
       keyAliases: {
         Control: 'ctrl',
       },
     })
+    const result = buildKeyArray(event, options)
 
     expect(result).toEqual(['ctrl', 'A'])
   })

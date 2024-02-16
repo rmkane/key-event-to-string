@@ -1,11 +1,11 @@
-import type { KeyInfo, Maybe } from '../types'
+import type { KeyData, Maybe } from '../types'
 
 /**
  * A list of key codes and their corresponding keys and codes.
  *
  * Based on: https://www.toptal.com/developers/keycode/table
  */
-const keys: KeyInfo[] = [
+const keys: KeyData[] = [
   { which: 0, key: 'Unidentified', code: 'Unidentified' },
   { which: 3, key: 'Cancel', code: 'Pause' },
   { which: 8, key: 'Backspace', code: 'Backspace' },
@@ -169,7 +169,7 @@ const keys: KeyInfo[] = [
  * @param code The code to search for.
  * @returns The key info, if found.
  */
-function findByCode(code: string): Maybe<KeyInfo> {
+function findByCode(code: string): Maybe<KeyData> {
   return keys.find(k => k.code === code)
 }
 
@@ -179,7 +179,7 @@ function findByCode(code: string): Maybe<KeyInfo> {
  * @param key The key to search for.
  * @returns The key info, if found.
  */
-function findByKey(key: string): KeyInfo[] {
+function findByKey(key: string): KeyData[] {
   return keys.filter(k => k.key === key)
 }
 
@@ -189,7 +189,7 @@ function findByKey(key: string): KeyInfo[] {
  * @param which The which to search for.
  * @returns The key info, if found.
  */
-function findByWhich(which: number): KeyInfo[] {
+function findByWhich(which: number): KeyData[] {
   return keys.filter(k => k.which === which)
 }
 

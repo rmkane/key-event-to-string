@@ -2,9 +2,9 @@
 type Maybe<T> = T | null | undefined
 
 /** The details about a key in a keyboard event. */
-type KeyInfo = {
-  which: number
-  key: string
+type KeyData = {
+  which?: number
+  key?: string
   code?: string
 }
 
@@ -101,7 +101,7 @@ type KeyEventModifiers = {
 
 /** The details about a single key in a keyboard event. */
 type EventKey = {
-  character: Maybe<string>
+  data: KeyData
   modifiers: KeyEventModifiers
 }
 
@@ -120,9 +120,9 @@ export type {
   CodeAliases,
   EventKey,
   KeyAliases,
+  KeyData,
   KeyEventDetails,
   KeyEventModifiers,
-  KeyInfo,
   KeyToText,
   Maybe,
   MobileKeyAliases,

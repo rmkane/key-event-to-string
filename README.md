@@ -14,14 +14,59 @@ pnpm install @rmkane/key-event-to-string
 
 ## Usage
 
+To utilize the `KeyboardEventProcessor`, an instance must be instantiated with configuration `options`. This processor provides a `processKeyboardEvent` method that converts a `KeyboardEvent` into a `KeyboardEventDetails` instance. The resulting `KeyboardEventDetails` object offers several methods to retrieve key information as a string, an array, or detailed diagnostics.
+
 ```js
-const KeyEventToString = require('key-event-to-string')
-const event2string = KeyEventToString(options)
+const processor = new KeyboardEventProcessor(options)
 
 document.body.addEventListener('keydown', e => {
-  const keys = event2string(e)
-  console.log(keys) // e.g. "Ctrl + A"
+  const details = processor.processKeyboardEvent(e)
+
+  // Formatted keys as a string or an array
+  console.log(details.getKeysAsString()) // "Ctrl + A"
+  console.log(details.getKeysAsArray()) // ["Ctrl", "A"]
+
+  // Diagnostic details
+  console.log(details.getKeyEventDetails())
+  // {
+  //   "hasKey": true,
+  //   "hasModifier": true,
+  //   "map": {
+  //     "data": {
+  //       "key": "a",
+  //       "code": "KeyA"
+  //     },
+  //     "modifiers": {
+  //       "altKey": false,
+  //       "ctrlKey": true,
+  //       "metaKey": false,
+  //       "shiftKey": false
+  //     }
+  //   }
+  // }
 })
+```
+
+### Import
+
+#### CommonJS
+
+```js
+const KeyEventToString = require('key-event-to-string')
+const { KeyboardEventProcessor } = KeyEventToString
+```
+
+#### Module
+
+```js
+import KeyEventToString from 'key-event-to-string'
+const { KeyboardEventProcessor } = KeyEventToString
+```
+
+#### Browser
+
+```js
+const { KeyboardEventProcessor } = window.KeyEventToString
 ```
 
 ### Options
@@ -55,8 +100,8 @@ The default settings are compatible with the format that common keyboard shortcu
 
 ### Detailed information
 
-`require('key-event-to-string').details(e)` can be used to get more details. This can be useful for
-validating keyboard shortcuts, e.g. for requiring a modifier and a normal key.
+The result of `processor.processKeyboardEvent(e)` can be used to get more details about the event. This can be useful for validating keyboard shortcuts, e.g. for requiring a modifier and a normal key.
+
 It returns an object with this information:
 
 - `hasModifier`: True iff atleast one of cmd, ctrl, alt or shift was pressed
@@ -66,6 +111,4 @@ It returns an object with this information:
 
 ## Disclaimer
 
-- This library is meant to parse only `keydown` events. `keypress` / `keyup` events have small differences, e..g. `keydown` is needed to capture `Command` on a Mac. So `keydown` is advisible for this anyways.
-- I wrote this library for an Electron side project, so I only needed it to run in the Chrome runtime. It probably won't work well in old browsers
-- JavaScript keyCodes don't work well with special international characters. E.g. the German umlaut `ö` has the same keyCode as `;`, on a German keyboard. This library doesn't try to fix that and I don't think there's a good fix for all those special cases. Other keyboard shortcut libraries (Mousetrap/keymaster e.g.) have the same problem, so it shouldn't be a big problem since this library is meant to be used as a helper for those libraries
+This library is meant to parse only `keydown` events. The `keypress`/`keyup` events have small differences, e.g. `keydown` is needed to capture `Command` on a Mac. So `keydown` is advisible for this anyways.

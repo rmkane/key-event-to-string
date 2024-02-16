@@ -3,6 +3,7 @@ import type {
   CodeAliases,
   EventKey,
   KeyAliases,
+  KeyData,
   KeyEventDetails,
   KeyEventModifiers,
   Maybe,
@@ -13,13 +14,17 @@ import type {
   SystemKeyAliases,
 } from './types.js'
 
-import { event2string, details } from './functions.js'
+import {
+  KeyboardEventDetails,
+  KeyboardEventProcessor,
+} from './classes/index.js'
 
 export type {
   ArrowKeyAliases,
   CodeAliases,
   EventKey,
   KeyAliases,
+  KeyData,
   KeyEventDetails,
   KeyEventModifiers,
   Maybe,
@@ -30,4 +35,4 @@ export type {
   SystemKeyAliases,
 }
 
-export { details, event2string }
+export { KeyboardEventDetails, KeyboardEventProcessor }
