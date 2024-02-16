@@ -1,10 +1,7 @@
 import type { EventKey, KeyEventDetails, Options } from './types.js'
 
-import { defaultOptions } from './constants.js'
 import { buildKeyArray, buildKeyMap, hasModifier } from './utils/key.js'
-import { deepMerge } from './utils/object.js'
-import { defaultMacModifiers } from './keys/modifiers.js'
-import { mobileShorthandLookup } from './keys/shorthand.js'
+import { defaultOptions, mergeOptions } from './options.js'
 
 /**
  * Builds the details about a keyboard event, including whether it has a key,
@@ -36,24 +33,6 @@ function event2string(
   return function (event: KeyboardEvent): string {
     return buildKeyArray(event, opts).join(opts.joinWith)
   }
-}
-
-/**
- * Merges the user options with the default options.
- *
- * @param options - The user options to merge.
- * @returns The merged options.
- */
-function mergeOptions(options: Options): Options {
-  const opts: Options = {}
-  deepMerge(opts, defaultOptions, options)
-  if (opts.platform!.isMac) {
-    deepMerge(opts.keyAliases!, defaultMacModifiers)
-  }
-  if (opts.platform!.isMobile) {
-    deepMerge(opts.keyAliases!, mobileShorthandLookup)
-  }
-  return opts
 }
 
 export { details, event2string }

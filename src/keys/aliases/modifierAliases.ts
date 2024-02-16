@@ -1,13 +1,10 @@
-import type { ModifierKeyAliases } from '../types'
-
-/** A set of key codes that represent modifier keys. */
-const modifierKeys = new Set(['Alt', 'Control', 'Meta', 'Shift'])
+import type { ModifierKeyAliases } from '../../types'
 
 /**
  * The default key modifiers to use when converting a keyboard event to a
  * string.
  */
-const defaultModifiers: ModifierKeyAliases = {
+const defaultModifierKeyAliases: ModifierKeyAliases = {
   Meta: 'Cmd',
   Control: 'Ctrl',
   Alt: 'Alt',
@@ -18,7 +15,7 @@ const defaultModifiers: ModifierKeyAliases = {
  * The default key modifiers to use when converting a keyboard event to a string
  * on Windows.
  */
-const defaultWindowsModifiers: ModifierKeyAliases = {
+const defaultWindowsModifierKeyAliases: ModifierKeyAliases = {
   Meta: '\u229E', // (Windows key): '⊞' (SQUARE LOZENGE)
   Control: 'Ctrl',
   Alt: 'Alt',
@@ -29,20 +26,15 @@ const defaultWindowsModifiers: ModifierKeyAliases = {
  * The default key modifiers to use when converting a keyboard event to a string
  * on macOS.
  */
-const defaultMacModifiers: ModifierKeyAliases = {
+const defaultMacModifierKeyAliases: ModifierKeyAliases = {
   Meta: '\u2318', // (Command Key): '⌘' (PLACE OF INTEREST SIGN)
   Control: '\u2303', // '⌃' (UP ARROWHEAD)
   Alt: '\u2325', // (Option key): '⌥' (OPTION KEY)
   Shift: '\u21E7', // '⇧' (UPWARDS WHITE ARROW)
 } as const
 
-function isModifierKey(key: string): boolean {
-  return modifierKeys.has(key)
-}
-
 export {
-  defaultMacModifiers,
-  defaultModifiers,
-  defaultWindowsModifiers,
-  isModifierKey,
+  defaultMacModifierKeyAliases,
+  defaultModifierKeyAliases,
+  defaultWindowsModifierKeyAliases,
 }

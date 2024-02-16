@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type { Maybe } from '../types.js'
 
 /**
@@ -8,7 +6,7 @@ import type { Maybe } from '../types.js'
  * @param obj - The value to check
  * @returns True if the value is an object; otherwise, false.
  */
-function isObject(obj: unknown): obj is Record<string, any> {
+function isObject(obj: unknown): obj is Record<string, unknown> {
   return obj != null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
@@ -19,17 +17,20 @@ function isObject(obj: unknown): obj is Record<string, any> {
  * @param source - The source object to merge from.
  * @returns The merged object.
  */
-function deepMergeInner<T extends Record<string, any>>(target: T, source: T) {
+function deepMergeInner<T extends Record<string, unknown>>(
+  target: T,
+  source: T,
+): T {
   for (const key in source) {
-    const targetValue = target[key]
-    const sourceValue = source[key]
+    const targetVal = target[key]
+    const sourceVal = source[key]
 
-    if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-      target[key] = targetValue.concat(sourceValue)
-    } else if (isObject(targetValue) && isObject(sourceValue)) {
-      target[key] = deepMergeInner(Object.assign({}, targetValue), sourceValue)
+    if (Array.isArray(targetVal) && Array.isArray(sourceVal)) {
+      target[key] = [...targetVal, ...sourceVal] as T[Extract<keyof T, string>]
+    } else if (isObject(targetVal) && isObject(sourceVal)) {
+      target[key] = deepMergeInner({ ...targetVal }, sourceVal)
     } else {
-      target[key] = sourceValue
+      target[key] = sourceVal
     }
   }
 
@@ -44,15 +45,18 @@ function deepMergeInner<T extends Record<string, any>>(target: T, source: T) {
  * @throws An error if less than 2 objects are provided.
  * @throws An error if any value is not an object.
  */
-function deepMerge<T extends Record<string, any>>(...objects: T[]) {
+function deepMerge<T extends Record<string, unknown>>(...objects: T[]): T {
   if (objects.length < 2) {
     throw new Error(
       'deepMerge: this function expects at least 2 objects to be provided',
     )
   }
 
-  if (objects.some(object => !isObject(object))) {
-    throw new Error('deepMerge: all values should be of type "object"')
+  const nonObjectIndex = objects.findIndex(object => !isObject(object))
+  if (nonObjectIndex !== -1) {
+    throw new Error(
+      `deepMerge: value at index ${nonObjectIndex} is not an object`,
+    )
   }
 
   const target = objects.shift() as T

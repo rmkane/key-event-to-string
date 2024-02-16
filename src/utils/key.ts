@@ -6,9 +6,22 @@ import type {
   Options,
 } from '../types.js'
 
-import { defaultModifiers, isModifierKey } from '../keys/modifiers.js'
-import { defaultOptions } from '../constants.js'
+import { defaultModifierKeyAliases } from '../keys/aliases/modifierAliases.js'
+import { defaultOptions } from '../options.js'
 import { pluck } from './object.js'
+
+/** A set of key codes that represent modifier keys. */
+const modifierKeys = new Set(['Alt', 'Control', 'Meta', 'Shift'])
+
+/**
+ * Determines whether a key is a modifier key.
+ *
+ * @param key - The key to check.
+ * @returns True if the key is a modifier key; otherwise, false.
+ */
+function isModifierKey(key: string): boolean {
+  return modifierKeys.has(key)
+}
 
 /**
  * Maps an alpha key to its uppercase version.
@@ -73,23 +86,25 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
 
   // Edge-case: Only the meta key is pressed
   if (event.key === 'Meta' && !hasModifier(mods)) {
-    return [options.keyAliases?.Meta ?? defaultModifiers.Meta!]
+    return [options.keyAliases?.Meta ?? defaultModifierKeyAliases.Meta!]
   }
 
   const result = []
 
   // The order is: Meta, Control, Alt, Shift, Character
   if (mods.metaKey) {
-    result.push(options.keyAliases?.Meta ?? defaultModifiers.Meta!)
+    result.push(options.keyAliases?.Meta ?? defaultModifierKeyAliases.Meta!)
   }
   if (mods.ctrlKey) {
-    result.push(options.keyAliases?.Control ?? defaultModifiers.Control!)
+    result.push(
+      options.keyAliases?.Control ?? defaultModifierKeyAliases.Control!,
+    )
   }
   if (mods.altKey) {
-    result.push(options.keyAliases?.Alt ?? defaultModifiers.Alt!)
+    result.push(options.keyAliases?.Alt ?? defaultModifierKeyAliases.Alt!)
   }
   if (mods.shiftKey) {
-    result.push(options.keyAliases?.Shift ?? defaultModifiers.Shift!)
+    result.push(options.keyAliases?.Shift ?? defaultModifierKeyAliases.Shift!)
   }
   if (map.character != null) {
     result.push(map.character)

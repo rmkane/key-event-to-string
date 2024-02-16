@@ -1,7 +1,7 @@
-import type { CodeAliases } from '../types'
+import type { CodeAliases } from '../../types'
 
 /** Maps an event.key to a symbol for physical keyboards. */
-const physicalKeyLookup: CodeAliases = {
+const defaultCodeAliases: CodeAliases = {
   Backquote: '`',
   Digit0: '0',
   Digit1: '1',
@@ -26,4 +26,4 @@ const physicalKeyLookup: CodeAliases = {
   Space: 'Space',
 }
 
-export { physicalKeyLookup }
+export { defaultCodeAliases }

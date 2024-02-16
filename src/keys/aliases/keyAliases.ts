@@ -1,7 +1,11 @@
-import type { KeyAliases, MobileKeyAliases, SystemKeyAliases } from '../types'
+import type {
+  KeyAliases,
+  MobileKeyAliases,
+  SystemKeyAliases,
+} from '../../types'
 
 /** Maps an event.key to a symbol for desktop-friendly support. */
-const shorthandLookup: KeyAliases & SystemKeyAliases = {
+const defaultKeyAliases: KeyAliases & SystemKeyAliases = {
   ArrowLeft: '\u2190', // '←' (LEFTWARDS ARROW)
   ArrowUp: '\u2191', // '↑' (UPWARDS ARROW)
   ArrowRight: '\u2192', // '→' (RIGHTWARDS ARROW)
@@ -10,7 +14,7 @@ const shorthandLookup: KeyAliases & SystemKeyAliases = {
 }
 
 /** Maps an event.key to a symbol for mobile-friendly support. */
-const mobileShorthandLookup: MobileKeyAliases = {
+const mobileKeyAliases: MobileKeyAliases = {
   Backspace: '\u232B', // '⌫' (ERASE TO THE LEFT)
   CapsLock: '\u21EA', // '⇪' (UPWARDS WHITE ARROW FROM BAR)
   Enter: '\u21B5', // '↵' (DOWNWARDS ARROW WITH CORNER LEFTWARDS)
@@ -22,4 +26,4 @@ const mobileShorthandLookup: MobileKeyAliases = {
   Tab: '\u21B9', // '↹' (LEFTWARDS ARROW TO BAR OVER RIGHTWARDS ARROW TO BAR)
 }
 
-export { mobileShorthandLookup, shorthandLookup }
+export { defaultKeyAliases, mobileKeyAliases }
