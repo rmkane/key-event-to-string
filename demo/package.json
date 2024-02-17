@@ -10,6 +10,7 @@
     "build:dist": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --ignore-path .eslintignore --ext .ts ./src",
+    "lint:fix": "pnpm lint --fix",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\""
   },
   "devDependencies": {

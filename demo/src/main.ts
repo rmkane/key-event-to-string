@@ -44,8 +44,8 @@ const eventProcessor = new KeyboardEventProcessor(options)
 
 document.addEventListener('keydown', e => {
   e.preventDefault()
-  const details = eventProcessor.processKeyboardEvent(e);
-  console.log(details.getKeyEventDetails());
+  const details = eventProcessor.processKeyboardEvent(e)
+  console.log(details.getKeyEventDetails())
   renderKeyDownEventKeys(details)
 })
 
@@ -66,8 +66,8 @@ document.dispatchEvent(keydownEvent)
 
 function renderKeyDownEventKeys(details: KeyboardEventDetails): void {
   const parsedKeys = parseKeys(details.getKeysAsString(), joinToken)
-  const keys = details.getKeysAsArray();
-  console.log('Keys match:', keys.join(' ') === parsedKeys.join(' '));
+  const keys = details.getKeysAsArray()
+  console.log('Keys match:', keys.join(' ') === parsedKeys.join(' '))
   keysEl.replaceChildren(...toKeyComboList(keys))
 }
 

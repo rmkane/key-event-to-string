@@ -41,6 +41,7 @@
     "prepublishOnly": "pnpm test && pnpm lint && pnpm build",
     "release": "changeset publish",
     "lint": "tsc && eslint --ignore-path .eslintignore --ext .ts ./src",
+    "lint:fix": "pnpm lint --fix",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
     "format:all": "pnpm format && pnpm format:demo",
     "format:demo": "cd demo && pnpm format",
