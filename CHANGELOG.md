@@ -1,5 +1,11 @@
 # @rmkane/key-event-to-string
 
+## 0.4.1
+
+### Patch Changes
+
+- edab02e: Fix some types
+
 ## 0.4.0
 
 ### Minor Changes
