@@ -109,6 +109,22 @@ It returns an object with this information:
 - `map`: An object containing information which modifier is active and what
   other key is pressed
 
+## Recomended VS Code settings
+
+Here are the recommended settings for this repository:
+
+```json
+// .vscode/settings.json
+{
+  "css.customData": [".vscode/css_custom_data.json"],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.rulers": [80]
+}
+```
+
 ## Disclaimer
 
 This library is meant to parse only `keydown` events. The `keypress`/`keyup` events have small differences, e.g. `keydown` is needed to capture `Command` on a Mac. So `keydown` is advisible for this anyways.
