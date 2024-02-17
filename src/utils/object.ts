@@ -1,5 +1,3 @@
-import type { Maybe } from '../types.js'
-
 /**
  * Check if the provided value is an object
  *
@@ -69,8 +67,8 @@ function deepMerge<T extends Record<string, unknown>>(...objects: T[]): T {
   return target
 }
 
-function pluck<T, K extends keyof T, V>(object: T, key: K): Maybe<V> {
-  return object[key] as V
+function pluck<T, K extends keyof T>(object: T, key: K): T[K] {
+  return object[key]
 }
 
 export { deepMerge, pluck }

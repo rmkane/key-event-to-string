@@ -88,7 +88,7 @@ function buildKeyArray(event: KeyboardEvent, options: Options): string[] {
     return [options.keyAliases?.Meta ?? defaultModifierKeyAliases.Meta!]
   }
 
-  const result = []
+  const result: string[] = []
 
   // The order is: Meta, Control, Alt, Shift, Character
   if (mods.metaKey) {

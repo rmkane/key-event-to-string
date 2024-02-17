@@ -8,9 +8,6 @@ type KeyData = {
   code?: string
 }
 
-/** A map of key codes to their corresponding text or symbol. */
-type KeyToText = Record<string, string>
-
 /** System key aliases. */
 type SystemKeyAliases = {
   Escape?: string
@@ -123,7 +120,6 @@ export type {
   KeyData,
   KeyEventDetails,
   KeyEventModifiers,
-  KeyToText,
   Maybe,
   MobileKeyAliases,
   ModifierKeyAliases,
